@@ -5,6 +5,12 @@
 2. 大段检索输出交给 context-mode（`ctx_execute` / `ctx_execute_file` 等）过滤，只把摘要带回窗口
 3. 读文件用 `read` + offset/limit，先小段后扩展
 
+代码结构 / 调用链（CodeGraph，CLI；Pi 暂无原生 MCP）：
+- 项目需已 `codegraph init`（有 `.codegraph/`）；未初始化时不要硬调，改用 fff / `read`
+- 结构问题优先：`codegraph explore "<问题或符号/文件>"`（一次拿源码片段 + 调用路径 + 影响面）
+- 辅助：`codegraph query <符号>`、`codegraph callers|callees|impact <符号>`、`codegraph status`
+- 大段输出可再经 context-mode 过滤；不要为同一问题再 grep/整文件重扫一遍
+
 工具调用纪律：
 - 禁止以文本形式输出 XML/DSML tool call 假装调用工具；参数错了让工具校验/修复（pi-tool-repair 已开 grammarRepair）
 - bash 长命令自行带 `timeout`；pi-timeout 会兜底，模型显式值优先

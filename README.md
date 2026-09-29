@@ -7,6 +7,7 @@ Pi Coding Agent 的可安装配置骨架：packages、MCP、extensions、浏览�
 - **浏览器栈**：日常交互用 Vercel `agent-browser`（CLI 步进）；重型 E2E 用 Playwright；二者共用 Playwright 安装的 Chrome for Testing，不重复下载。暂缓 Browser Use Pi（日常步进够用时再加）。
 - **packages**：`context-mode`、`@ff-labs/pi-fff`、`@jamiefutch/pi-timeout`、`pi-tool-repair`、`pi-web-access`。
 - **检索**：默认保持 Pi 四个核心工具；代码/路径检索走 `ffgrep`/`fffind`，大输出进 context-mode。
+- **CodeGraph**：结构/调用链走 CLI（`codegraph explore` 等）；Pi 暂无原生 MCP。
 - **超时**：`runTimeout { maxSeconds: 30, fallbackMaxSeconds: 300 }`，与 pi-timeout 互补。
 - **安全**：模板不含 API key；鉴权用目标机自己的登录。
 
