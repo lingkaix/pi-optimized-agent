@@ -1,6 +1,6 @@
 {
   "name": "pi-optimized-agent",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Pi Agent 优化配置 meta 包：一键安装 packages / MCP / extensions / 跨平台 Playwright+agent-browser 共用内核。",
   "type": "module",
   "license": "MIT",
@@ -39,7 +39,7 @@
       }
     },
     "prompts": {
-      "AGENTS.md.template": "薄纪律层：搜索顺序 + 禁止文本 invoke + 浏览器栈指针（见 prompts/README.md）"
+      "AGENTS.md.template": "薄纪律层：ffgrep/fffind + context-mode、禁文本 invoke、浏览器栈指针"
     },
     "browser": {
       "decision": "日常 agent-browser / 重型 Playwright / 共用 Playwright Chromium / 暂缓 Browser Use Pi",
