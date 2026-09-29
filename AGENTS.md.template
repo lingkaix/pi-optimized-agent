@@ -1,8 +1,8 @@
 # Pi Agent 薄纪律（模板）
 
-搜索与文件阅读顺序（避免乱搜/大文件整读）：
-1. 内置 grep / find / ls 或 `ffgrep` / `fffind`（按文件分组、分页）
-2. 必要时 `rg` 精确定位
+搜索与文件阅读顺序（避免乱搜 / 大文件整读）：
+1. 内置 grep / find / ls，或 `ffgrep` / `fffind`（按文件分组、分页）
+2. 必要时再用 `rg` 精确定位
 3. 读文件用 `read` + offset/limit，先小段后扩展
 4. 大输出优先交给沙箱（ctx_execute / ctx_execute_file）过滤，只回摘要
 
@@ -10,9 +10,9 @@
 - 禁止以文本形式输出 XML/DSML tool call 假装调用工具；参数错了让工具校验/修复（pi-tool-repair 已开 grammarRepair）
 - bash 长命令自行带 `timeout`；pi-timeout 会兜底，模型显式值优先
 
-浏览器栈（定案，见 KB `reports/pi-agent-config/optimized-config.md`）：
-- 日常交互：agent-browser（`AGENT_BROWSER_EXECUTABLE_PATH` 指向共享 Chromium）
-- 重型 E2E / 回归：Playwright（`/home/box/.local/share/pi-browser-stack`）
-- 暂缓 Browser Use Pi；不要为此下载第二套浏览器
+浏览器栈：
+- 日常交互：`agent-browser`（`AGENT_BROWSER_EXECUTABLE_PATH` 指向与 Playwright 共用的 Chromium）
+- 重型 E2E / 回归：Playwright（本地包目录默认 `~/.local/share/pi-browser-stack`）
+- 暂缓 Browser Use Pi；不要为此再装第二套浏览器
 
-网页搜索/抓取（无需点击）：`web_search` / `fetch_content`（pi-web-access），知识库检索走 KB 工具，二者正交。
+网页搜索/抓取（无需点击）：`web_search` / `fetch_content`（pi-web-access）。

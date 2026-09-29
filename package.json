@@ -1,6 +1,6 @@
 {
   "name": "pi-optimized-agent",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Pi Agent 优化配置 meta 包：一键安装 packages / MCP / extensions / 跨平台 Playwright+agent-browser 共用内核。",
   "type": "module",
   "license": "MIT",
@@ -43,7 +43,6 @@
     },
     "browser": {
       "decision": "日常 agent-browser / 重型 Playwright / 共用 Playwright Chromium / 暂缓 Browser Use Pi",
-      "chromium": "/home/box/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
       "env": "AGENT_BROWSER_EXECUTABLE_PATH"
     }
   }

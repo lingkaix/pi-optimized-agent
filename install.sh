@@ -162,11 +162,10 @@ find_chromium() {
     echo "$AGENT_BROWSER_EXECUTABLE_PATH"
     return 0
   fi
-  # Prefer find over fragile globs (macOS app name changed to "Google Chrome for Testing")
+  # Prefer find over fragile globs (macOS app name: "Google Chrome for Testing")
   for base in \
     "$HOME/Library/Caches/ms-playwright" \
-    "$HOME/.cache/ms-playwright" \
-    /home/box/.cache/ms-playwright; do
+    "$HOME/.cache/ms-playwright"; do
     [ -d "$base" ] || continue
     # Linux chrome binary
     while IFS= read -r cand; do
@@ -313,4 +312,4 @@ if [ -n "${CHROMIUM:-}" ]; then
 fi
 echo "冒烟（Playwright）:"
 echo "  cd ~/.local/share/pi-browser-stack && node -e \"const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage();await p.goto('https://example.com');console.log(await p.title());await b.close()})()\""
-echo "详见 README.md；完整冒烟记录见 SMOKE.md"
+echo "详见 README.md"
