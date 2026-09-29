@@ -1,0 +1,5 @@
+.settings.patch.json
+.mcp.patch.json
+*.tgz
+.DS_Store
+node_modules/

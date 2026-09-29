@@ -1,0 +1,50 @@
+{
+  "name": "pi-optimized-agent",
+  "version": "0.1.5",
+  "description": "Pi Agent 优化配置 meta 包：一键安装 packages / MCP / extensions / 跨平台 Playwright+agent-browser 共用内核。",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "install": "bash install.sh",
+    "check": "bash install.sh --check"
+  },
+  "keywords": [
+    "pi",
+    "coding-agent",
+    "harness",
+    "context-mode",
+    "agent-browser",
+    "playwright"
+  ],
+  "pi": {
+    "packages": [
+      "npm:context-mode",
+      "npm:@ff-labs/pi-fff",
+      "npm:@jamiefutch/pi-timeout",
+      "npm:pi-tool-repair",
+      "npm:pi-web-access"
+    ],
+    "settings": {
+      "runTimeout": {
+        "maxSeconds": 30,
+        "fallbackMaxSeconds": 300
+      }
+    },
+    "extensions": {
+      "pi-tool-repair.json": "grammarRepair (mode: recover) — DSML/XML 假文本 tool call 恢复"
+    },
+    "mcp": {
+      "context-mode": {
+        "command": "context-mode"
+      }
+    },
+    "prompts": {
+      "AGENTS.md.template": "薄纪律层：搜索顺序 + 禁止文本 invoke + 浏览器栈指针（见 prompts/README.md）"
+    },
+    "browser": {
+      "decision": "日常 agent-browser / 重型 Playwright / 共用 Playwright Chromium / 暂缓 Browser Use Pi",
+      "chromium": "/home/box/.cache/ms-playwright/chromium-1243/chrome-linux64/chrome",
+      "env": "AGENT_BROWSER_EXECUTABLE_PATH"
+    }
+  }
+}

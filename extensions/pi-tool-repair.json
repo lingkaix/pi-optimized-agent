@@ -1,0 +1,25 @@
+{
+  "grammarRepair": {
+    "enabled": true,
+    "mode": "recover",
+    "requireKnownTool": true,
+    "grammars": [
+      "dsml",
+      "invoke",
+      "qwen",
+      "kimi",
+      "mistral",
+      "llama",
+      "glm",
+      "granite",
+      "minimax-text",
+      "olmo"
+    ],
+    "leakModels": [
+      "deepseek",
+      "dsml",
+      "v4-flash",
+      "v4-pro"
+    ]
+  }
+}
