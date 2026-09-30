@@ -1,6 +1,6 @@
 {
   "name": "pi-optimized-agent",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Pi Agent 优化配置 meta 包：一键安装 packages / MCP / extensions / 跨平台 Playwright+agent-browser 共用内核。",
   "type": "module",
   "license": "MIT",
@@ -36,10 +36,18 @@
     "mcp": {
       "context-mode": {
         "command": "context-mode"
+      },
+      "codegraph": {
+        "command": "codegraph",
+        "args": [
+          "serve",
+          "--mcp"
+        ],
+        "exposure": "direct"
       }
     },
     "prompts": {
-      "AGENTS.md.template": "薄纪律：fff+context-mode、CodeGraph CLI、禁文本 invoke、浏览器栈"
+      "AGENTS.md.template": "薄纪律：fff+context-mode、CodeGraph 原生 MCP（codegraph_explore）、禁文本 invoke、浏览器栈"
     },
     "browser": {
       "decision": "日常 agent-browser / 重型 Playwright / 共用 Playwright Chromium / 暂缓 Browser Use Pi",

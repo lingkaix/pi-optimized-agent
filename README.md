@@ -7,7 +7,7 @@ Pi Coding Agent 的可安装配置骨架：packages、MCP、extensions、浏览�
 - **浏览器栈**：日常交互用 Vercel `agent-browser`（CLI 步进）；重型 E2E 用 Playwright；二者共用 Playwright 安装的 Chrome for Testing，不重复下载。暂缓 Browser Use Pi（日常步进够用时再加）。
 - **packages**：`context-mode`、`@ff-labs/pi-fff`、`@jamiefutch/pi-timeout`、`pi-tool-repair`、`pi-web-access`。
 - **检索**：默认保持 Pi 四个核心工具；代码/路径检索走 `ffgrep`/`fffind`，大输出进 context-mode。
-- **CodeGraph**：结构/调用链走 CLI（`codegraph explore` 等）；Pi 暂无原生 MCP。
+- **CodeGraph**：Pi 原生 MCP（`codegraph serve --mcp`，工具 `codegraph_explore`）。未索引项目先 `codegraph init`，否则回退 fff / read。不要用 CLI 的 explore/query/callers。
 - **超时**：`runTimeout { maxSeconds: 30, fallbackMaxSeconds: 300 }`，与 pi-timeout 互补。
 - **安全**：模板不含 API key；鉴权用目标机自己的登录。
 
@@ -37,7 +37,7 @@ chmod +x install.sh
 安装内容（幂等，不覆盖你已有的同名配置项）：
 
 1. `pi install` 五个 packages，并 merge `settings.json`（packages + runTimeout）
-2. merge `mcp.json`（context-mode；优先写绝对 bin 路径）
+2. merge `mcp.json`（context-mode + codegraph 原生 MCP；context-mode 优先写绝对 bin 路径）
 3. 缺失时复制 `extensions/pi-tool-repair.json`
 4. 检测或安装 Playwright Chromium，写入 `AGENT_BROWSER_EXECUTABLE_PATH`（`~/.pi/agent/browser.env`、已有的 `~/.bashrc` / `~/.zshrc`、`~/.agent-browser.json`）
 

@@ -101,25 +101,48 @@ else
 fi
 rm -f "$TOOL_DIR/.settings.patch.json"
 
-# --- 4. mcp.json：context-mode ----------------------------------------------
-echo "[3/5] mcp.json (context-mode)"
+# --- 4. mcp.json：context-mode + codegraph（原生 MCP） -----------------------
+echo "[3/5] mcp.json (context-mode + codegraph)"
 # Prefer absolute bin under Pi's package tree so MCP works without global PATH
 CM_BIN="$PI_DIR/npm/node_modules/.bin/context-mode"
 if [ -x "$CM_BIN" ]; then
   cat > "$TOOL_DIR/.mcp.patch.json" <<JSON
-{ "mcpServers": { "context-mode": { "command": "$CM_BIN" } } }
+{
+  "mcpServers": {
+    "context-mode": { "command": "$CM_BIN" },
+    "codegraph": {
+      "command": "codegraph",
+      "args": ["serve", "--mcp"],
+      "exposure": "direct"
+    }
+  }
+}
 JSON
 else
   cat > "$TOOL_DIR/.mcp.patch.json" <<'JSON'
-{ "mcpServers": { "context-mode": { "command": "context-mode" } } }
+{
+  "mcpServers": {
+    "context-mode": { "command": "context-mode" },
+    "codegraph": {
+      "command": "codegraph",
+      "args": ["serve", "--mcp"],
+      "exposure": "direct"
+    }
+  }
+}
 JSON
 fi
 if [ "$CHECK_ONLY" = 1 ]; then
   node -e '
     const fs=require("fs");
-    let ok=false;
-    try { const t=JSON.parse(fs.readFileSync(process.argv[1],"utf8")); ok=!!(t.mcpServers&&t.mcpServers["context-mode"]); } catch {}
-    console.log(ok?"  context-mode MCP OK":"  MISSING context-mode MCP");
+    let cm=false, cg=false;
+    try {
+      const t=JSON.parse(fs.readFileSync(process.argv[1],"utf8"));
+      cm=!!(t.mcpServers&&t.mcpServers["context-mode"]);
+      cg=!!(t.mcpServers&&t.mcpServers["codegraph"]);
+    } catch {}
+    console.log(cm?"  context-mode MCP OK":"  MISSING context-mode MCP");
+    console.log(cg?"  codegraph MCP OK":"  MISSING codegraph MCP");
   ' "$PI_DIR/mcp.json"
 else
   if [ ! -f "$PI_DIR/mcp.json" ]; then echo '{}' > "$PI_DIR/mcp.json"; fi
